@@ -59,8 +59,8 @@
 </head>
 <body>
 
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="https://screenapp.io/app/#/shared/_QfbHnTtXw" type="audio/mp3">
+  <audio id="backgroundMusic" loop>
+    <source src="https://www.myserver.com/audio.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
@@ -78,6 +78,7 @@
   <script>
     let noCount = 0;
     let allowMove = false;
+    let audioPlayed = false;
 
     window.onload = function () {
       document.getElementById("yesBtn").onclick = handleYes;
@@ -123,14 +124,13 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-      let audio = document.getElementById("backgroundMusic");
-      audio.muted = true;
-      audio.play().then(() => {
-        audio.muted = false;
-      }).catch(error => {
-        console.log("Autoplay dicegah oleh browser. Musik akan diputar setelah interaksi.");
-      });
+    // Aktifkan pemutaran setelah ada interaksi pengguna
+    document.addEventListener("click", function() {
+      if (!audioPlayed) {
+        let audio = document.getElementById("backgroundMusic");
+        audio.play();
+        audioPlayed = true;
+      }
     });
   </script>
 
